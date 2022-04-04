@@ -1,2 +1,2 @@
 # library-management-system
-BCA projectt
+BCA project
