@@ -32,7 +32,7 @@ public class ManageStudent implements ActionListener,MenuListener{
     Connection con;
     Statement stmt;
     
-    static String[] userType = {"User", "Y"};
+    static String[] userType = {"User", "N"};
     JFrame frame = new JFrame();
     JMenuBar menuBar;
     JMenu show, insert, update, delete;
@@ -657,8 +657,8 @@ public class ManageStudent implements ActionListener,MenuListener{
     
     public static void main(String[] args) {
         
-//        userType[0] = args[0];
-//        userType[1] = args[1];
+       userType[0] = args[0];
+       userType[1] = args[1];
         new ManageStudent();
         
     }
