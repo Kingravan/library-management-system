@@ -198,221 +198,250 @@ public class ManageStudent implements ActionListener,MenuListener{
             }
         });
         frame.setLayout(null);
-        frame.setTitle("Library Management - Manage Staff");
+        frame.setTitle("Library Management - Manage Student");
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setVisible(true);
     }
     
-//    @Override
-//    public void actionPerformed(ActionEvent e){
-//        if(e.getSource() == show_result)
-//        {
-//            tableModel.setRowCount(0);
-//            String IDorName = input_new_id.getText();
-//            if(IDorName.contains("\"") || IDorName.contains("\'") || IDorName.contains("-") || IDorName.contains("#") || IDorName.contains(";") || IDorName.contains("&") || IDorName.contains("^") || IDorName.contains("(") || IDorName.contains(")"))
-//            {
-//                JOptionPane.showMessageDialog(null, "Invalid Characters in ID");
-//                input_new_id.setText("");
-//            }
-//            else
-//            {
-//                if(!IDorName.isEmpty())
-//                {
-//                    try
-//                    {
-//                        int id = Integer.parseInt(IDorName);
-//                        ResultSet rs = stmt.executeQuery("Select * from student_details where ID like '" + id +"%'");
-//                        while(rs.next())
-//                        {
-//                             tableModel.insertRow(tableModel.getRowCount(), new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)});
-//                        }
-//                    }
-//                    catch(NumberFormatException e2)
-//                    {
-//                        try
-//                    {
-//                        ResultSet rs = stmt.executeQuery("Select * from student_details where Name like '" + IDorName +"%' order by id");
-//                        while(rs.next())
-//                        {
-//                            tableModel.insertRow(tableModel.getRowCount(), new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)});
-//                        }
-//                    }
-//                    catch(SQLException e1){}
-//                    }
-//                    catch(SQLException e1){}
-//            }
-//                else
-//                    {
-//                        printFullTable();
-//                    }
-//            }
-//        }
-//        
-//        else if(e.getSource() == insert_new)
-//        {
-//            String ID = input_new_id.getText();
-//            String temp = input_new_name.getText();
-//            if(temp.equals(""))
-//            {
-//                JOptionPane.showMessageDialog(null, "Fields can not be empty");
-//            }
-//            String Name_1 = temp.substring(0, 1);
-//            Name_1 = Name_1.toUpperCase();
-//            String Name_2 = temp.substring(1);
-//            String Name = Name_1 + Name_2;
-//            String Mobile = input_new_mobile.getText();
-//            int count = 0;
-//            if(ID.contains("\"") || ID.contains("\'") || ID.contains("-") || ID.contains("#") || ID.contains(";") || ID.contains("&") || ID.contains("^") || ID.contains("(") || ID.contains(")"))
-//            {
-//                JOptionPane.showMessageDialog(null, "Invalid Characters in ID");
-//            }
-//            else if(Name.contains("\"") || Name.contains("\'") || Name.contains("-") || Name.contains("#") || Name.contains(";") || Name.contains("&") || Name.contains("^") || Name.contains("(") || Name.contains(")"))
-//            {
-//                JOptionPane.showMessageDialog(null, "Invalid Characters in Name");
-//            }
-//            else if(Mobile.contains("\"") || Mobile.contains("\'") || Mobile.contains("-") || Mobile.contains("#") || Mobile.contains(";") || Mobile.contains("&") || Mobile.contains("^") || Mobile.contains("(") || Mobile.contains(")"))
-//            {
-//                JOptionPane.showMessageDialog(null, "Invalid Characters in Mobile");
-//            }
-//            else if(Mobile.length() != 10 && (Mobile.startsWith("6") || Mobile.startsWith("7") || Mobile.startsWith("8") || Mobile.startsWith("9")))
-//            {
-//                JOptionPane.showMessageDialog(null, "Mobile number must be 10 long \nMobile number must start from 6, 7, 8 or 9");
-//            }
-//            
-//            if(!ID.isEmpty() && !Name.isEmpty() && !Mobile.isEmpty() && !Password.isEmpty())
-//            {
-//                try
-//                {
-//                    int id = Integer.parseInt(ID);
-//                    String user_admin_or_not = "N";
-//                    if(rdb_yes.isSelected())
-//                    {
-//                        user_admin_or_not = "Y";
-//                    }
-//                    count = stmt.executeUpdate("Insert into staff_details values(" + id +" , '" + Name +"', '" + Mobile + "', '" + user_admin_or_not + "', '" + Designation + "', '" + Password + "')");
-//                }
-//                catch(SQLException e1){}
-//                catch(NumberFormatException e2)
-//                {
-//                    JOptionPane.showMessageDialog(null, "Enter valid ID");
-//                }
-//                
-//                if(count > 0)
-//                {
-//                    String user_admin_or_not = "N";
-//                    tableModel.insertRow(tableModel.getRowCount(), new Object[] {ID, Name, Mobile, user_admin_or_not, Designation, Password});
-//                    JOptionPane.showMessageDialog(null, "Record added Successfully");
-//                }
-//            }
-//            else
-//            {
-//                JOptionPane.showMessageDialog(null, "Fields can not be empty");
-//            }
-//            
-//            input_new_id.setText("");
-//            input_new_name.setText("");
-//            input_new_mobile.setText("");
-//        }
-//        else if(e.getSource() == fill_details)
-//        {
-//            String ID = input_new_id.getText();
-//            try
-//            {
-//                int id = Integer.parseInt(ID);
-//                ResultSet rs = stmt.executeQuery("Select * from staff_details where id = " + id +"");
-//                while(rs.next())
-//                {
-//                    input_new_name.setText(rs.getString(2));
-//                    input_new_mobile.setText(rs.getString(3));
-//                }
-//            }
-//            catch(NumberFormatException|SQLException e1)
-//            {
-//                JOptionPane.showMessageDialog(null, "Enter valid id");
-//            }
-//        }
-//        else if(e.getSource() == update_details)
-//        {
-//            String ID = input_new_id.getText();
-//            String temp = input_new_name.getText();
-//            if(temp.equals(""))
-//            {
-//                JOptionPane.showMessageDialog(null, "Fields can not be empty");
-//            }
-//            String Name_1 = temp.substring(0, 1);
-//            Name_1 = Name_1.toUpperCase();
-//            String Name_2 = temp.substring(1);
-//            String Name = Name_1 + Name_2;
-//            String Mobile = input_new_mobile.getText();
-//            int count = 0;
-//            if(ID.contains("\"") || ID.contains("\'") || ID.contains("-") || ID.contains("#") || ID.contains(";") || ID.contains("&") || ID.contains("^") || ID.contains("(") || ID.contains(")"))
-//            {
-//                JOptionPane.showMessageDialog(null, "Invalid Characters in ID");
-//            }
-//            else if(Name.contains("\"") || Name.contains("\'") || Name.contains("-") || Name.contains("#") || Name.contains(";") || Name.contains("&") || Name.contains("^") || Name.contains("(") || Name.contains(")"))
-//            {
-//                JOptionPane.showMessageDialog(null, "Invalid Characters in Name");
-//            }
-//            else if(Mobile.contains("\"") || Mobile.contains("\'") || Mobile.contains("-") || Mobile.contains("#") || Mobile.contains(";") || Mobile.contains("&") || Mobile.contains("^") || Mobile.contains("(") || Mobile.contains(")"))
-//            {
-//                JOptionPane.showMessageDialog(null, "Invalid Characters in Mobile");
-//            }
-//            else if(Mobile.length() != 10 && (Mobile.startsWith("6") || Mobile.startsWith("7") || Mobile.startsWith("8") || Mobile.startsWith("9")))
-//            {
-//                JOptionPane.showMessageDialog(null, "Mobile number must be 10 character long \nMobile number must start from 6, 7, 8 or 9");
-//            }
-////            else if(Password.length() < 8 || Password.length() > 25 || Password.contains("\"") || Password.contains("\'") || Password.contains("-") || Password.contains("#") || Password.contains(";") || Password.contains("&") || Password.contains("^") || Password.contains("(") || Password.contains(")"))
-//            {
-//                JOptionPane.showMessageDialog(null, "Password length must be 8 to 25 character long \nPassword must contain only Uppercase and Lowercase letters \nNot allowed special characters are (\", -, #, ;, &, ^, (, ))");
-//            }
-//            
-////            if(!ID.isEmpty() && !Name.isEmpty() && !Password.isEmpty())
-//            {
-//                try
-//                {
-//                    int id = Integer.parseInt(ID);
-//                    String user_admin_or_not = "N";
-////                    count = stmt.executeUpdate("Update staff_details set Name = '" + Name + "', Mobile = '" + Mobile + "', Is_Admin = '" + user_admin_or_not + "', Designation = '" + Designation + "', Password = '" + Password + "' where ID = " + id + "");
-//                }
-////                catch(SQLException e1){}
-//                catch(NumberFormatException e2)
-//                {
-//                    JOptionPane.showMessageDialog(null, "Enter valid ID");
-//                }
-//                
-//                if(count > 0)
-//                {
-//                    String user_admin_or_not = "N";
-////                    tableModel.insertRow(tableModel.getRowCount(), new Object[] {ID, Name, Mobile, user_admin_or_not, Designation, Password});
-//                    JOptionPane.showMessageDialog(null, "Record added Updated");
-//                }
-//            }
-////            else
-//            {
-//                JOptionPane.showMessageDialog(null, "Fields can not be empty");
-//            }
-//            
-//            input_new_id.setText("");
-//            input_new_name.setText("");
-//            input_new_mobile.setText("");
-//        }
-//        else if(e.getSource() == delete_selected)
-//        {
-//            int[] index = result_container.getSelectedRows();
-//            for(int i = 0; i < index.length; i++)
-//            {
-//                try
-//                {
-//                    stmt.executeUpdate("Delete from staff_details where ID = " + result_container.getValueAt(index[i], 0) + "");
-//                }
-//                catch(SQLException e2)
-//                {}
-//            }
-//            tableModel.setRowCount(0);
-//            printFullTable();
-//        }
-//    }
+    @Override
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource() == show_result)
+        {
+            tableModel.setRowCount(0);
+            String IDorName = input_new_id.getText();
+            if(IDorName.contains("\"") || IDorName.contains("\'") || IDorName.contains("-") || IDorName.contains("#") || IDorName.contains(";") || IDorName.contains("&") || IDorName.contains("^") || IDorName.contains("(") || IDorName.contains(")"))
+            {
+                JOptionPane.showMessageDialog(null, "Invalid Characters in ID");
+                input_new_id.setText("");
+            }
+            else
+            {
+                if(!IDorName.isEmpty())
+                {
+                    try
+                    {
+                        int id = Integer.parseInt(IDorName);
+                        ResultSet rs = stmt.executeQuery("Select * from student_details where ID like '" + id +"%'");
+                        while(rs.next())
+                        {
+                             tableModel.insertRow(tableModel.getRowCount(), new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)});
+                        }
+                    }
+                    catch(NumberFormatException e2)
+                    {
+                        try
+                    {
+                        ResultSet rs = stmt.executeQuery("Select * from student_details where Name like '" + IDorName +"%' order by id");
+                        while(rs.next())
+                        {
+                            tableModel.insertRow(tableModel.getRowCount(), new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)});
+                        }
+                    }
+                    catch(SQLException e1){}
+                    }
+                    catch(SQLException e1){}
+            }
+                else
+                    {
+                        printFullTable();
+                    }
+            }
+        }
+        
+        else if(e.getSource() == insert_new)
+        {
+            String ID = input_new_id.getText();
+            String temp = input_new_name.getText();
+            if(temp.equals(""))
+            {
+                JOptionPane.showMessageDialog(null, "Fields can not be empty");
+            }
+            String Name_1 = temp.substring(0, 1);
+            Name_1 = Name_1.toUpperCase();
+            String Name_2 = temp.substring(1);
+            String Name = Name_1 + Name_2;
+            String Mobile = input_new_mobile.getText();
+            int From = (Integer) batch_from.getValue();
+            int To = (Integer) batch_to.getValue();
+            String Batch = "";
+            if(From < To)
+            {
+                Batch = String.valueOf(From) + "-" + String.valueOf(To);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Select valid batch (From Year) - (To Year)");
+            }
+            int TotalBookIssued = (Integer) input_total_book_issued.getValue();
+            String Department = (String) department.getSelectedItem();
+            int count = 0;
+            if(ID.contains("\"") || ID.contains("\'") || ID.contains("-") || ID.contains("#") || ID.contains(";") || ID.contains("&") || ID.contains("^") || ID.contains("(") || ID.contains(")"))
+            {
+                JOptionPane.showMessageDialog(null, "Invalid Characters in ID");
+            }
+            else if(Name.contains("\"") || Name.contains("\'") || Name.contains("-") || Name.contains("#") || Name.contains(";") || Name.contains("&") || Name.contains("^") || Name.contains("(") || Name.contains(")"))
+            {
+                JOptionPane.showMessageDialog(null, "Invalid Characters in Name");
+            }
+            else if(Mobile.contains("\"") || Mobile.contains("\'") || Mobile.contains("-") || Mobile.contains("#") || Mobile.contains(";") || Mobile.contains("&") || Mobile.contains("^") || Mobile.contains("(") || Mobile.contains(")"))
+            {
+                JOptionPane.showMessageDialog(null, "Invalid Characters in Mobile");
+            }
+            else if(Mobile.length() != 10 && (Mobile.startsWith("6") || Mobile.startsWith("7") || Mobile.startsWith("8") || Mobile.startsWith("9")))
+            {
+                JOptionPane.showMessageDialog(null, "Mobile number must be 10 long \nMobile number must start from 6, 7, 8 or 9");
+            }
+            
+            if(!ID.isEmpty() && !Name.isEmpty() && !Mobile.isEmpty() && !Batch.isEmpty())
+            {
+                try
+                {
+                    int id = Integer.parseInt(ID);
+                    count = stmt.executeUpdate("Insert into student_details values(" + id +", '" + Batch + "', '" + Name + "', '" + Department + "', '" + Mobile + "', " + TotalBookIssued + ")");
+                }
+                catch(SQLException e1){
+                System.out.print("Error");
+                System.out.println(Batch);
+                System.out.println(Department);
+                System.out.println("" + TotalBookIssued);}
+                catch(NumberFormatException e2)
+                {
+                    JOptionPane.showMessageDialog(null, "Enter valid ID");
+                }
+                
+                if(count > 0)
+                {
+                    tableModel.insertRow(tableModel.getRowCount(), new Object[] {ID, Batch, Name, Department, Mobile, TotalBookIssued});
+                    JOptionPane.showMessageDialog(null, "Record added Successfully");
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Fields can not be empty");
+            }
+            input_new_id.setText("");
+            input_new_name.setText("");
+            input_new_mobile.setText("");
+            batch_from.setValue(2020);
+            batch_to.setValue(2020);
+            department.setSelectedIndex(0);
+            input_total_book_issued.setValue(0);
+        }
+        else if(e.getSource() == fill_details)
+        {
+            String ID = input_new_id.getText();
+            try
+            {
+                int id = Integer.parseInt(ID);
+                ResultSet rs = stmt.executeQuery("Select * from student_details where id = " + id +"");
+                while(rs.next())
+                {
+                    String temp = rs.getString(2);
+                    int From = Integer.valueOf(temp.substring(0, 4));
+                    int To = Integer.valueOf(temp.substring(5));
+                    batch_from.setValue(From);
+                    batch_to.setValue(To);
+                    input_new_name.setText(rs.getString(3));
+                    String Department = rs.getString(4);
+                    department.setSelectedItem(Department);
+                    input_new_mobile.setText(rs.getString(5));
+                    int TotalIssued = rs.getInt(6);
+                    input_total_book_issued.setValue(TotalIssued);
+                }
+            }
+            catch(NumberFormatException|SQLException e1)
+            {
+                JOptionPane.showMessageDialog(null, "Enter valid id");
+            }
+        }
+        else if(e.getSource() == update_details)
+        {
+            String ID = input_new_id.getText();
+            String temp = input_new_name.getText();
+            if(temp.equals(""))
+            {
+                JOptionPane.showMessageDialog(null, "Fields can not be empty");
+            }
+            String Name_1 = temp.substring(0, 1);
+            Name_1 = Name_1.toUpperCase();
+            String Name_2 = temp.substring(1);
+            String Name = Name_1 + Name_2;
+            int From = (Integer) batch_from.getValue();
+            int To = (Integer) batch_to.getValue();
+            String Batch = "";
+            if(From < To)
+            {
+                Batch = String.valueOf(From) + "-" + String.valueOf(To);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Select valid batch (From Year) - (To Year)");
+            }
+            int TotalBookIssued = (Integer) input_total_book_issued.getValue();
+            String Department = (String) department.getSelectedItem();
+            String Mobile = input_new_mobile.getText();
+            int count = 0;
+            if(ID.contains("\"") || ID.contains("\'") || ID.contains("-") || ID.contains("#") || ID.contains(";") || ID.contains("&") || ID.contains("^") || ID.contains("(") || ID.contains(")"))
+            {
+                JOptionPane.showMessageDialog(null, "Invalid Characters in ID");
+            }
+            else if(Name.contains("\"") || Name.contains("\'") || Name.contains("-") || Name.contains("#") || Name.contains(";") || Name.contains("&") || Name.contains("^") || Name.contains("(") || Name.contains(")"))
+            {
+                JOptionPane.showMessageDialog(null, "Invalid Characters in Name");
+            }
+            else if(Mobile.contains("\"") || Mobile.contains("\'") || Mobile.contains("-") || Mobile.contains("#") || Mobile.contains(";") || Mobile.contains("&") || Mobile.contains("^") || Mobile.contains("(") || Mobile.contains(")"))
+            {
+                JOptionPane.showMessageDialog(null, "Invalid Characters in Mobile");
+            }
+            else if(Mobile.length() != 10 && (Mobile.startsWith("6") || Mobile.startsWith("7") || Mobile.startsWith("8") || Mobile.startsWith("9")))
+            {
+                JOptionPane.showMessageDialog(null, "Mobile number must be 10 character long \nMobile number must start from 6, 7, 8 or 9");
+            }
+            
+            if(!ID.isEmpty() && !Name.isEmpty() && !Batch.isEmpty())
+            {
+                try
+                {
+                    int id = Integer.parseInt(ID);
+                    count = stmt.executeUpdate("Update student_details set Name = '" + Name + "', Batch = '" + Batch + "', Dept = '" + Department + "', Mobile = '" + Mobile +"', No_of_book_issued = " + TotalBookIssued + " where ID = " + id + "");
+                }
+                catch(SQLException e1){}
+                catch(NumberFormatException e2)
+                {
+                    JOptionPane.showMessageDialog(null, "Enter valid ID");
+                }
+                
+                if(count > 0)
+                {
+                    tableModel.insertRow(tableModel.getRowCount(), new Object[] {ID, Batch, Name, Department, Mobile, TotalBookIssued});
+                    JOptionPane.showMessageDialog(null, "Record Updated Successfully");
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Fields can not be empty");
+            }
+            
+            input_new_id.setText("");
+            input_new_name.setText("");
+            input_new_mobile.setText("");
+        }
+        else if(e.getSource() == delete_selected)
+        {
+            int[] index = result_container.getSelectedRows();
+            for(int i = 0; i < index.length; i++)
+            {
+                try
+                {
+                    stmt.executeUpdate("Delete from student_details where ID = " + result_container.getValueAt(index[i], 0) + "");
+                }
+                catch(SQLException e2)
+                {}
+            }
+            tableModel.setRowCount(0);
+        }
+    }
     
     @Override
     public void menuSelected(MenuEvent me){
@@ -531,7 +560,7 @@ public class ManageStudent implements ActionListener,MenuListener{
             show_result.setVisible(false);
             insert_new.setVisible(false);
             delete_selected.setVisible(false);
-            fill_details.setVisible(false);
+            fill_details.setVisible(true);
             update_details.setVisible(true);
             
             newid.setBounds(310, 15, 100, 20);
@@ -542,6 +571,7 @@ public class ManageStudent implements ActionListener,MenuListener{
             newbookissued.setBounds(310, 165, 130, 20);
         
             input_new_id.setBounds(450, 15, 150, 20);
+            fill_details.setBounds(610, 15, 80, 20);
             batch_from.setBounds(450, 45, 70, 20);
             batch_to.setBounds(530, 45, 70, 20);
             input_new_name.setBounds(450, 75, 150, 20);
@@ -565,13 +595,17 @@ public class ManageStudent implements ActionListener,MenuListener{
             update.setSelected(true);
             delete.setSelected(false);
             
-            System.out.print("Update");
         }
         else if(me.getSource() == delete)
         {
             newid.setVisible(false);
             idorname.setVisible(true);
             newname.setVisible(false);
+            newbatch.setVisible(false);
+            batch_from.setVisible(false);
+            batch_to.setVisible(false);
+            newdept.setVisible(false);
+            department.setVisible(false);
             newmobile.setVisible(false);
             input_new_id.setVisible(true);
             input_new_name.setVisible(false);
@@ -627,10 +661,5 @@ public class ManageStudent implements ActionListener,MenuListener{
 //        userType[1] = args[1];
         new ManageStudent();
         
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
