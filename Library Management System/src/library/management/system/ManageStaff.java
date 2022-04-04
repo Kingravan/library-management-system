@@ -423,7 +423,7 @@ public class ManageStaff implements ActionListener,MenuListener{
                         user_admin_or_not = "Y";
                     }
                     tableModel.insertRow(tableModel.getRowCount(), new Object[] {ID, Name, Mobile, user_admin_or_not, Designation, Password});
-                    JOptionPane.showMessageDialog(null, "Record added Updated");
+                    JOptionPane.showMessageDialog(null, "Record Updated Successfully");
                 }
             }
             else
@@ -451,7 +451,6 @@ public class ManageStaff implements ActionListener,MenuListener{
                 {}
             }
             tableModel.setRowCount(0);
-            printFullTable();
         }
     }
     
@@ -608,8 +607,6 @@ public class ManageStaff implements ActionListener,MenuListener{
             insert.setSelected(false);
             update.setSelected(true);
             delete.setSelected(false);
-            
-            System.out.print("Update");
         }
         else if(me.getSource() == delete)
         {
