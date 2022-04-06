@@ -6,6 +6,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
+import javax.swing.Icon;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -22,7 +24,9 @@ public class LibraryManagementSystem implements ActionListener{
     JLabel login, userid, password;
     JTextField input_userid;
     JPasswordField input_password;
-    JButton submit;
+    JButton submit, showhidepassword;
+    Icon icon;
+    String currenticon = "hide";
     LibraryManagementSystem()
     {   
         login = new JLabel("Login");
@@ -37,6 +41,8 @@ public class LibraryManagementSystem implements ActionListener{
         input_userid.setFont(new Font("Ariel", Font.PLAIN, 15));
         input_password.setFont(new Font("Ariel", Font.PLAIN, 15));
 
+        icon = new ImageIcon(getClass().getResource("resources\\hidePassword.png"));
+        showhidepassword = new JButton(icon);
         submit = new JButton("Submit");
         submit.setFont(new Font("Ariel", Font.BOLD, 20));
 
@@ -44,10 +50,12 @@ public class LibraryManagementSystem implements ActionListener{
         userid.setBounds(50, 120, 120, 25);
         password.setBounds(50, 170, 120, 25);
         input_userid.setBounds(180, 120, 170, 25);
-        input_password.setBounds(180, 170, 170, 25);
+        input_password.setBounds(180, 170, 135, 25);
+        showhidepassword.setBounds(315, 170,35, 25);
         submit.setBounds(155, 250, 120, 35);
         
         submit.addActionListener(this);
+        showhidepassword.addActionListener(this);
         frame.getRootPane().setDefaultButton(submit);
 
         frame.add(login);
@@ -55,6 +63,7 @@ public class LibraryManagementSystem implements ActionListener{
         frame.add(password);
         frame.add(input_userid);
         frame.add(input_password);
+        frame.add(showhidepassword);
         frame.add(submit);
         
         frame.setSize(450, 450);
@@ -68,55 +77,73 @@ public class LibraryManagementSystem implements ActionListener{
 
     public void actionPerformed(ActionEvent e)
     {
-        String login_id = input_userid.getText();
-        String login_password = String.valueOf(input_password.getPassword());
-        if(login_id.equals("") || login_password.equals(""))
+        if(e.getSource() == submit)
         {
-            JOptionPane.showMessageDialog(null, "Enter User ID");
-            input_userid.setText("");
-            input_userid.grabFocus();
-        }
-        else if(login_password.equals(""))
-        {
-            JOptionPane.showMessageDialog(null, "Enter Password");
-            input_password.setText("");
-            input_password.grabFocus();
-        }
-        if(login_id.contains("\"") || login_id.contains("\'") || login_id.contains("-") || login_id.contains("#") || login_id.contains(";") || login_id.contains("&") || login_id.contains("^") || login_id.contains("(") || login_id.contains(")"))
-        {
-            JOptionPane.showMessageDialog(null, "Invalid Characters in User id");
-            input_userid.setText("");
-        }
-        else if(login_password.contains("\"") || login_password.contains("\'") || login_password.contains("-") || login_password.contains("#") || login_password.contains(";") || login_password.contains("&") || login_password.contains("^") || login_password.contains("(") || login_password.contains(")"))
-        {
-            JOptionPane.showMessageDialog(null, "Invalid Characters in Password");
-            input_password.setText("");
-        }
-        else
-        {
-         Statement stmt;
-         Connection con;
-        try
-        {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management_system", "root", "root");
-            stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("Select * from staff_details where ID = " + login_id +" and password = '" + login_password + "'" );
-            if(rs.next())
+            String login_id = input_userid.getText();
+            String login_password = String.valueOf(input_password.getPassword());
+            if(login_id.equals(""))
             {
-                String[] result = {rs.getString(2), rs.getString(4)};
-                HomePage.main(result);
-                frame.dispose();
+                JOptionPane.showMessageDialog(null, "Enter User ID");
+                input_userid.setText("");
+                input_userid.grabFocus();
+            }
+            else if(login_password.equals(""))
+            {   
+                JOptionPane.showMessageDialog(null, "Enter Password");
+                input_password.setText("");
+                input_password.grabFocus();
+            }
+            if(login_id.contains("\"") || login_id.contains("\'") || login_id.contains("-") || login_id.contains("#") || login_id.contains(";") || login_id.contains("&") || login_id.contains("^") || login_id.contains("(") || login_id.contains(")"))
+            {
+                JOptionPane.showMessageDialog(null, "Invalid Characters in User id");
+                input_userid.setText("");
+            }
+            else if(login_password.contains("\"") || login_password.contains("\'") || login_password.contains("-") || login_password.contains("#") || login_password.contains(";") || login_password.contains("&") || login_password.contains("^") || login_password.contains("(") || login_password.contains(")"))
+            {
+                JOptionPane.showMessageDialog(null, "Invalid Characters in Password");
+                input_password.setText("");
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "Invalid User ID or Password");
+                Statement stmt;
+                Connection con;
+                try
+                {
+                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management_system", "root", "root");
+                    stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery("Select * from staff_details where ID = " + login_id +" and password = '" + login_password + "'" );
+                    if(rs.next())
+                    {
+                        String[] result = {rs.getString(2), rs.getString(4)};
+                        HomePage.main(result);
+                        frame.dispose();
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Invalid User ID or Password");
+                    }    
+                }
+                catch(SQLException e1){}
             }
-            
         }
-        catch(SQLException e1)
-        {}
+        
+        else if(e.getSource() == showhidepassword)
+        {
+            if(currenticon == "hide")
+            {
+                icon = new ImageIcon(getClass().getResource("resources\\showPassword.png"));
+                showhidepassword.setIcon(icon);
+                currenticon = "show";
+                input_password.setEchoChar((char)0);
+            }
+            else
+            {
+                icon = new ImageIcon(getClass().getResource("resources\\hidePassword.png"));
+                showhidepassword.setIcon(icon);
+                currenticon = "hide";
+                input_password.setEchoChar('*');
+            }
         }
-
     }
 
     public static void main(String[] args) {
